@@ -123,9 +123,10 @@
             const seconds = Math.floor(
                 (distance % (1000 * 60)) / 1000
             );
+const miliseconds = Math.floor(distance % 1000);
 
             document.getElementById("countdown").textContent =
-                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                `${days}d ${hours}h ${minutes}m ${seconds}s ${String(miliseconds).padStart(3,"0")}ms`;
         }
 
         updateCountdown();
