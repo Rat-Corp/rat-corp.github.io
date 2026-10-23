@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emerytura Janka</title>
+    <style>
+        body {background-color: #FF5C00;}
+        h1 {
+            text-align: center;
+            font-size: 50px;
+            margin-top:80px;
+            animation:
+                    spin 4s infinite ease-in-out,
+                    rainbow 1s infinite linear;
+        }
+        p {
+            text-align: center;
+            font-size: 30px;
+            animation: spin 2s infinite linear,
+            rainbow 10s infinite linear;
+        }
+        @keyframes spin {
+            0%   { transform: rotate(0deg); }
+            33%  { transform: rotate(-30deg); }
+            66%  { transform: rotate(0deg); }
+            100%  { transform: rotate(30deg); }
+        }
+
+        @keyframes rainbow {
+            0%   { color: powderblue; }
+            16%  { color: orange; }
+            33%  { color: yellow; }
+            50%  { color: lime; }
+            66%  { color: cyan; }
+            83%  { color: blue; }
+            100% { color: violet; }
+        }
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 80px;
+        }
+
+        .countdown-container img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            animation: jump 2s infinite ease-in-out;
+        }
+
+        .countdown-content {
+            text-align: center;
+        }
+
+
+        #countdown {
+            text-align: center;
+            font-size: 40px;
+            color: black;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+        }
+        @keyframes jump {
+            0%, 50%, 100%{
+                transform: translateY(0);
+            }
+            25%{
+                transform: translateY(30px);
+            }
+            75% {
+                transform: translateY(-30px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Emerytura Janka</h1>
+    <div class="countdown-container">
+
+        <!-- Left picture -->
+        <img src="kid.png"
+             alt="Left picture">
+
+        <!-- Countdown in the middle -->
+        <div class="countdown-content">
+            <p>za</p>
+            <div id="countdown"></div>
+        </div>
+
+        <!-- Right picture -->
+        <img src="kid.png"
+             alt="Right picture">
+
+    </div>
+
+
+    <script>
+        // Set your target date here
+        const targetDate = new Date("2027-01-01T00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance <= 0) {
+                document.getElementById("countdown").textContent =
+                    "The date has arrived!";
+                clearInterval(timer);
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(
+                (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            const minutes = Math.floor(
+                (distance % (1000 * 60 * 60)) / (1000 * 60)
+            );
+            const seconds = Math.floor(
+                (distance % (1000 * 60)) / 1000
+            );
+
+            document.getElementById("countdown").textContent =
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        updateCountdown();
+        const timer = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
